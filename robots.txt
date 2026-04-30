@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://guitar-lessons.arcawave.dev/sitemap-index.xml
