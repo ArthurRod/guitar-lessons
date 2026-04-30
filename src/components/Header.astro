@@ -1,0 +1,54 @@
+---
+import {SITE_TITLE} from "../consts";
+
+import "../styles/header.css";
+import HeaderLink from "./HeaderLink.astro";
+import MenuMobile from "./MenuMobile.astro";
+
+const {value = ""} = Astro.props;
+---
+
+<header>
+  <div class="container">
+    <nav>
+      <h2>
+        <a href="/">
+          <span class="sr-only">{SITE_TITLE}</span>
+          <img width={56} height={56} src="/png/logo.png" alt="Guitar Lessons" />
+        </a>
+      </h2>
+      <div class="search-bar desktop">
+        <form action="/search" method="GET">
+          <input
+            type="text"
+            name="q"
+            placeholder="Buscar aula..."
+            value={value}
+          />
+          <button type="submit" aria-label="Buscar">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21 21-4.34-4.34"></path><circle cx="11" cy="11" r="8"></circle></svg>
+          </button>
+        </form>
+      </div>
+      <div class="internal-links desktop">
+        <HeaderLink href="/">Aulas</HeaderLink>
+        <HeaderLink href="/about">Sobre</HeaderLink>
+        <HeaderLink href="/politicas-de-privacidade">Privacidade</HeaderLink>
+      </div>
+      <MenuMobile />
+    </nav>
+    <div class="search-bar mobile">
+      <form action="/search" method="GET">
+        <input
+          type="text"
+          name="q"
+          placeholder="Buscar aula..."
+          value={value}
+        />
+        <button type="submit" aria-label="Buscar">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21 21-4.34-4.34"></path><circle cx="11" cy="11" r="8"></circle></svg>
+        </button>
+      </form>
+    </div>
+  </div>
+</header>

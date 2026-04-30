@@ -1,0 +1,37 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
+import {NOT_FOUND_TITLE, SITE_DESCRIPTION} from "../consts";
+
+import "../styles/not-found.css";
+---
+
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <BaseHead title={NOT_FOUND_TITLE} description={SITE_DESCRIPTION} />
+  </head>
+  <body>
+    <Header />
+    <main class="not-found">
+      <div class="container">
+        <div class="content">
+          <div class="code-wrapper">
+            <div class="code-shadow">404</div>
+            <div class="content">
+              <h1 class="code">404</h1>
+            </div>
+          </div>
+          <h2>Página não encontrada</h2>
+          <p>
+            Desculpe, a página que você está procurando não existe ou foi
+            movida.
+          </p>
+          <a class="btn-primary" href="/">Voltar para o início</a>
+        </div>
+      </div>
+    </main>
+    <Footer />
+  </body>
+</html>

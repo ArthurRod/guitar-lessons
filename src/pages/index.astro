@@ -1,0 +1,112 @@
+---
+import {getCollection} from "astro:content";
+import BaseHead from "../components/BaseHead.astro";
+import Footer from "../components/Footer.astro";
+import FormattedDate from "../components/FormattedDate.astro";
+import Header from "../components/Header.astro";
+import {SITE_DESCRIPTION, SITE_TITLE} from "../consts";
+
+import "../styles/home.css";
+
+const posts = (await getCollection("blog"))
+  .sort((a, b) => (b.data.pubDate?.valueOf() ?? 0) - (a.data.pubDate?.valueOf() ?? 0));
+
+const publishedSlugs = new Set(posts.map((p) => p.id));
+
+// Histórico completo simulado (mostra todas as aulas, marcando as que ainda não saíram)
+const roadmap = [
+  {n: 1, slug: "aula-1-primeiro-contato", title: "Primeiro contato com o violão + primeira música", tag: "Iniciante"},
+  {n: 2, slug: "aula-2-trocas-e-ritmo", title: "Trocas suaves de acordes + ritmo na batida", tag: "Iniciante"},
+  {n: 3, slug: "aula-3-mais-acordes", title: "Novos acordes: Em, C e Bm (pestana leve)", tag: "Iniciante"},
+  {n: 4, slug: "aula-4-graus-na-pratica", title: "Graus 1, 4, 5 e 6 — pensando como músico", tag: "Harmonia"},
+  {n: 5, slug: "aula-5-segunda-musica", title: "Segunda música worship completa", tag: "Repertório"},
+  {n: 6, slug: "aula-6-batidas", title: "Variações de batida e dinâmica", tag: "Ritmo"},
+  {n: 7, slug: "aula-7-tom-e-cifra", title: "Como ler cifra e mudar de tom", tag: "Teoria"},
+  {n: 8, slug: "aula-8-dedilhado", title: "Introdução ao dedilhado", tag: "Técnica"},
+];
+---
+
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+  </head>
+  <body>
+    <Header />
+    <main class="home">
+      <div class="container">
+        <section class="home-hero">
+          <h1>Aprenda violão tocando 🎸</h1>
+          <p>Aulas curtas, práticas e com música worship desde o primeiro dia. Sem decoreba, sem complicação — só o que você precisa pra tocar de verdade.</p>
+          <div class="actions">
+            <a class="btn-primary" href="/posts/aula-1-primeiro-contato">Começar pela Aula 1</a>
+            <a class="btn-ghost" href="#aulas">Ver todas as aulas</a>
+          </div>
+        </section>
+
+        <div class="section-title">
+          <h2>Últimas aulas</h2>
+          <span class="badge">{posts.length} publicada{posts.length === 1 ? "" : "s"}</span>
+        </div>
+        <section>
+          <ul>
+            {
+              posts.slice(0, 5).map((post) => (
+                <li>
+                  <a href={`/posts/${post.id}`}>
+                    <img
+                      width={720}
+                      height={360}
+                      src={post.data.heroImage}
+                      alt={post.data.title}
+                      loading="lazy"
+                    />
+                    <h4 class="title">{post.data.title}</h4>
+                    <p class="date">
+                      {post.data.pubDate && <FormattedDate date={post.data.pubDate} />}
+                    </p>
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </section>
+
+        <div class="section-title" id="aulas">
+          <h2>Histórico completo do curso</h2>
+          <span class="badge">{roadmap.length} aulas no plano</span>
+        </div>
+        <ul class="timeline">
+          {
+            roadmap.map((l) => {
+              const published = publishedSlugs.has(l.slug);
+              return (
+                <li class={published ? "" : "locked"}>
+                  {published ? (
+                    <a href={`/posts/${l.slug}`}>
+                      <span class="lesson-meta">
+                        <span class="tag">Aula {l.n}</span>
+                        <span>{l.tag}</span>
+                      </span>
+                      <span class="lesson-title">{l.title}</span>
+                    </a>
+                  ) : (
+                    <a href="#" onclick="event.preventDefault()" aria-disabled="true" style="cursor:not-allowed;opacity:.7">
+                      <span class="lesson-meta">
+                        <span class="tag" style="background:#e5e7eb;color:#6b7280">Aula {l.n}</span>
+                        <span>{l.tag}</span>
+                      </span>
+                      <span class="lesson-title">{l.title}</span>
+                      <span class="lesson-soon">em breve</span>
+                    </a>
+                  )}
+                </li>
+              );
+            })
+          }
+        </ul>
+      </div>
+    </main>
+    <Footer />
+  </body>
+</html>

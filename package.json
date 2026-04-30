@@ -1,0 +1,25 @@
+{
+  "name": "guitar-lessons",
+  "type": "module",
+  "version": "0.1.0",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "deploy": "npx gh-pages -d dist",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/mdx": "^4.2.4",
+    "@astrojs/rss": "^4.0.11",
+    "@astrojs/sitemap": "^3.3.0",
+    "@astrojs/svelte": "^7.1.0",
+    "astro": "^5.7.3",
+    "fuse.js": "^7.1.0",
+    "svelte": "^5.33.1",
+    "typescript": "^5.8.3"
+  },
+  "devDependencies": {
+    "gh-pages": "^6.3.0"
+  }
+}

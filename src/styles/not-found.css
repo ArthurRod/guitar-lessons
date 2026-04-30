@@ -1,0 +1,19 @@
+.not-found .content {
+  max-width: 42rem;
+  text-align: center;
+  margin: 0px auto;
+  padding: 2rem 0;
+}
+.not-found .code-wrapper { position: relative; margin-bottom: 1rem; }
+.not-found .code-wrapper .code-shadow {
+  font-size: 8rem; font-weight: 900; opacity: 0.08; color: var(--primary);
+}
+.not-found .code-wrapper .content {
+  display: flex; align-items: center; justify-content: center;
+  position: absolute; inset: 0; padding: 0;
+}
+.not-found .code-wrapper .code {
+  font-size: 4.5rem; font-weight: 900; color: var(--primary);
+}
+.not-found h2 { font-size: 1.6rem; font-weight: 700; margin-bottom: 1rem; }
+.not-found p { font-size: 1.05rem; margin-bottom: 2rem; color: var(--gray); }

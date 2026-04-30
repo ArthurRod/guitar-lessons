@@ -1,0 +1,25 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Footer from "../components/Footer.astro";
+import Header from "../components/Header.astro";
+import {SEARCH_TITLE, SITE_DESCRIPTION} from "../consts";
+
+import SearchPosts from "../components/SearchPosts.astro";
+import "../styles/search.css";
+---
+
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <BaseHead title={SEARCH_TITLE} description={SITE_DESCRIPTION} />
+  </head>
+  <body>
+    <Header />
+    <main class="search">
+      <div class="container">
+        <SearchPosts />
+      </div>
+    </main>
+    <Footer />
+  </body>
+</html>

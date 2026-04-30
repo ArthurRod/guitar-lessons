@@ -1,0 +1,73 @@
+---
+import Layout from "../layouts/BlogPost.astro";
+
+const today = new Date();
+---
+
+<Layout
+  title="Políticas de Privacidade"
+  description="Saiba como tratamos seus dados pessoais e protegemos sua privacidade."
+>
+  <p>
+    A sua privacidade é importante para nós. É política da ArcaWave respeitar a
+    sua privacidade em relação a qualquer informação sua que possamos coletar no
+    nosso site, e outros serviços que possuímos e operamos.
+  </p>
+
+  <h2>1. Informações que coletamos</h2>
+  <p>
+    Coletamos informações pessoais que você nos fornece voluntariamente, como
+    nome, e-mail e mensagens enviadas por meio de formulários de contato. Também
+    coletamos automaticamente dados técnicos, como endereço IP, tipo de
+    navegador, páginas visitadas e tempo de navegação, por meio de cookies e
+    tecnologias similares.
+  </p>
+
+  <h2>2. Como utilizamos as informações</h2>
+  <p>Utilizamos os dados coletados para:</p>
+  <ul>
+    <li>Melhorar sua experiência de navegação;</li>
+    <li>Responder suas dúvidas e solicitações;</li>
+    <li>Analisar o desempenho e uso do site;</li>
+    <li>Enviar comunicações, caso você tenha autorizado.</li>
+  </ul>
+
+  <h2>3. Compartilhamento de dados</h2>
+  <p>
+    Não compartilhamos suas informações pessoais publicamente ou com terceiros,
+    exceto quando exigido por lei ou em casos específicos para funcionamento do
+    serviço (como provedores de hospedagem ou ferramentas de análise).
+  </p>
+
+  <h2>4. Uso de cookies</h2>
+  <p>
+    Utilizamos cookies para armazenar informações sobre suas preferências e
+    personalizar o conteúdo que exibimos. Você pode desativar os cookies nas
+    configurações do seu navegador.
+  </p>
+
+  <h2>5. Segurança das informações</h2>
+  <p>
+    Adotamos medidas de segurança para proteger seus dados pessoais contra
+    acesso não autorizado, alteração, divulgação ou destruição.
+  </p>
+
+  <h2>6. Seus direitos</h2>
+  <p>
+    Você tem o direito de acessar, corrigir ou excluir seus dados pessoais a
+    qualquer momento. Para isso, entre em contato conosco através dos canais
+    disponíveis no site.
+  </p>
+
+  <h2>7. Alterações nesta política</h2>
+  <p>
+    Podemos atualizar esta política de privacidade periodicamente. Recomendamos
+    que você a revise com frequência para estar ciente de eventuais alterações.
+  </p>
+
+  <p>
+    Esta política é válida a partir de <strong
+      >{today.toLocaleDateString("pt-BR")}</strong
+    >.
+  </p>
+</Layout>

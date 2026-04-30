@@ -1,0 +1,29 @@
+---
+import "../styles/footer.css";
+const today = new Date();
+---
+
+<footer>
+  <div class="container">
+    <div class="top">
+      <a href="/">
+        <img width={64} height={64} src="/png/logo.png" alt="Guitar Lessons" />
+      </a>
+      <div class="footer-links">
+        <h4>Navegação</h4>
+        <a href="/">Aulas</a>
+        <a href="/about">Sobre</a>
+        <a href="/search">Buscar</a>
+        <a href="/politicas-de-privacidade">Políticas de Privacidade</a>
+      </div>
+      <div class="footer-links">
+        <h4>Recursos</h4>
+        <a href="/rss.xml">RSS</a>
+        <a href="https://github.com/ArthurRod" target="_blank" rel="noopener noreferrer">GitHub</a>
+      </div>
+    </div>
+    <div class="bottom">
+      &copy; {today.getFullYear()} Guitar Lessons · um projeto Arca Wave 🎸
+    </div>
+  </div>
+</footer>
