@@ -13,17 +13,61 @@ const posts = (await getCollection("blog"))
 
 const publishedSlugs = new Set(posts.map((p) => p.id));
 
-// Histórico completo simulado (mostra todas as aulas, marcando as que ainda não saíram)
-const roadmap = [
-  {n: 1, slug: "aula-1-primeiro-contato", title: "Primeiro contato com o violão + primeira música", tag: "Iniciante"},
-  {n: 2, slug: "aula-2-trocas-e-ritmo", title: "Trocas suaves de acordes + ritmo na batida", tag: "Iniciante"},
-  {n: 3, slug: "aula-3-mais-acordes", title: "Novos acordes: Em, C e Bm (pestana leve)", tag: "Iniciante"},
-  {n: 4, slug: "aula-4-graus-na-pratica", title: "Graus 1, 4, 5 e 6 — pensando como músico", tag: "Harmonia"},
-  {n: 5, slug: "aula-5-segunda-musica", title: "Segunda música worship completa", tag: "Repertório"},
-  {n: 6, slug: "aula-6-batidas", title: "Variações de batida e dinâmica", tag: "Ritmo"},
-  {n: 7, slug: "aula-7-tom-e-cifra", title: "Como ler cifra e mudar de tom", tag: "Teoria"},
-  {n: 8, slug: "aula-8-dedilhado", title: "Introdução ao dedilhado", tag: "Técnica"},
+const phases = [
+  {
+    n: 1,
+    title: "Fase 1 — Fundamentos",
+    months: "Mês 1–2",
+    lessons: [
+      {n: 1, slug: "aula-1-primeiro-contato", title: "Partes do violão, nome das cordas e notas musicais", tag: "Fundamentos"},
+      {n: 2, slug: "aula-2-notas-e-primeiros-acordes", title: "Notas no braço, conceito de tom e primeiros acordes", tag: "Fundamentos"},
+    ],
+  },
+  {
+    n: 2,
+    title: "Fase 2 — Primeiros acordes + ritmo",
+    months: "Mês 2–3",
+    lessons: [
+      {n: 3, slug: "aula-3-acordes-maiores", title: "Acordes maiores: D, A, G, C e E", tag: "Acordes"},
+      {n: 4, slug: "aula-4-troca-e-ritmo", title: "Trocas de acordes, ritmos simples e primeira música", tag: "Ritmo"},
+      {n: 5, slug: "aula-5-graus", title: "Graus 1, 4 e 5 — pensando como músico", tag: "Harmonia"},
+      {n: 6, slug: "aula-6-campo-harmonico", title: "Campo harmônico — por que as músicas funcionam", tag: "Harmonia"},
+    ],
+  },
+  {
+    n: 3,
+    title: "Fase 3 — Consciência musical",
+    months: "Mês 4–5",
+    lessons: [
+      {n: 7, slug: "aula-7-campo-harmonico-maior", title: "Campo harmônico maior e o grau 6 (menor)", tag: "Harmonia"},
+      {n: 8, slug: "aula-8-progressoes-worship", title: "Progressões worship comuns: 1-5-6-4", tag: "Harmonia"},
+      {n: 9, slug: "aula-9-ritmo-e-dinamica", title: "Ritmos do worship e dinâmica", tag: "Ritmo"},
+      {n: 10, slug: "aula-10-feeling", title: "Feeling e reconhecimento de padrões", tag: "Expressão"},
+    ],
+  },
+  {
+    n: 4,
+    title: "Fase 4 — Expansão",
+    months: "Mês 6–7",
+    lessons: [
+      {n: 11, slug: "aula-11-acordes-menores", title: "Acordes menores e introdução à pestana", tag: "Acordes"},
+      {n: 12, slug: "aula-12-capotraste", title: "Transposição simples com capotraste", tag: "Técnica"},
+      {n: 13, slug: "aula-13-musicas-completas", title: "Músicas completas com variações e dedilhado", tag: "Repertório"},
+      {n: 14, slug: "aula-14-acompanhamento", title: "Construção de acompanhamento", tag: "Técnica"},
+    ],
+  },
+  {
+    n: 5,
+    title: "Fase 5 — Independência",
+    months: "Mês 8",
+    lessons: [
+      {n: 15, slug: "aula-15-arranjos-e-grupo", title: "Arranjos simples e tocar em grupo", tag: "Arranjo"},
+      {n: 16, slug: "aula-16-independencia", title: "Independência musical — tocar sem depender da cifra", tag: "Independência"},
+    ],
+  },
 ];
+
+const roadmap = phases.flatMap((p) => p.lessons);
 ---
 
 <!doctype html>
@@ -36,7 +80,7 @@ const roadmap = [
     <main class="home">
       <div class="container">
         <section class="home-hero">
-          <h1>Aprenda violão tocando 🎸</h1>
+          <h1>Aprenda violão tocando</h1>
           <p>Aulas curtas, práticas e com música worship desde o primeiro dia. Sem decoreba, sem complicação — só o que você precisa pra tocar de verdade.</p>
           <div class="actions">
             <a class="btn-primary" href="/posts/aula-1-primeiro-contato">Começar pela Aula 1</a>
@@ -73,38 +117,46 @@ const roadmap = [
         </section>
 
         <div class="section-title" id="aulas">
-          <h2>Histórico completo do curso</h2>
-          <span class="badge">{roadmap.length} aulas no plano</span>
+          <h2>Roteiro completo do curso</h2>
+          <span class="badge">5 fases</span>
         </div>
-        <ul class="timeline">
-          {
-            roadmap.map((l) => {
-              const published = publishedSlugs.has(l.slug);
-              return (
-                <li class={published ? "" : "locked"}>
-                  {published ? (
-                    <a href={`/posts/${l.slug}`}>
-                      <span class="lesson-meta">
-                        <span class="tag">Aula {l.n}</span>
-                        <span>{l.tag}</span>
-                      </span>
-                      <span class="lesson-title">{l.title}</span>
-                    </a>
-                  ) : (
-                    <a href="#" onclick="event.preventDefault()" aria-disabled="true" style="cursor:not-allowed;opacity:.7">
-                      <span class="lesson-meta">
-                        <span class="tag" style="background:#e5e7eb;color:#6b7280">Aula {l.n}</span>
-                        <span>{l.tag}</span>
-                      </span>
-                      <span class="lesson-title">{l.title}</span>
-                      <span class="lesson-soon">em breve</span>
-                    </a>
-                  )}
-                </li>
-              );
-            })
-          }
-        </ul>
+        {
+          phases.map((phase) => (
+            <>
+              <div class="phase-header">
+                <span class="phase-title">{phase.title}</span>
+                <span class="phase-months">{phase.months}</span>
+              </div>
+              <ul class="timeline">
+                {phase.lessons.map((l) => {
+                  const published = publishedSlugs.has(l.slug);
+                  return (
+                    <li class={published ? "" : "locked"}>
+                      {published ? (
+                        <a href={`/posts/${l.slug}`}>
+                          <span class="lesson-meta">
+                            <span class="tag">Aula {l.n}</span>
+                            <span>{l.tag}</span>
+                          </span>
+                          <span class="lesson-title">{l.title}</span>
+                        </a>
+                      ) : (
+                        <a href="#" onclick="event.preventDefault()" aria-disabled="true" style="cursor:not-allowed;opacity:.7">
+                          <span class="lesson-meta">
+                            <span class="tag" style="background:#e5e7eb;color:#6b7280">Aula {l.n}</span>
+                            <span>{l.tag}</span>
+                          </span>
+                          <span class="lesson-title">{l.title}</span>
+                          <span class="lesson-soon">em breve</span>
+                        </a>
+                      )}
+                    </li>
+                  );
+                })}
+              </ul>
+            </>
+          ))
+        }
       </div>
     </main>
     <Footer />
