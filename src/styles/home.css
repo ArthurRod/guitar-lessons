@@ -6,27 +6,88 @@
   margin: 0;
   padding: 0;
 }
-.home ul li {
-  width: calc(50% - .75rem);
+.home ul li:not(.home .timeline li) {
+  width: calc(50% - 0.75rem);
   background: var(--white);
   border-radius: 16px;
   border: 1px solid var(--cream-2);
   overflow: hidden;
-  transition: transform .25s ease, box-shadow .25s ease;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
 }
-.home ul li:hover { transform: translateY(-4px); box-shadow: var(--box-shadow); }
-.home ul li * { text-decoration: none; }
-.home ul li a { display: block; color: var(--black); }
-.home ul li:first-child { width: 100%; }
-.home ul li:first-child img { width: 100%; aspect-ratio: 16/8; object-fit: cover; }
-.home ul li:first-child .title { font-size: 1.6rem; padding: 0 1rem; }
-.home ul li:first-child .date { padding: 0 1rem 1rem; }
-.home ul li img { display: block; width: 100%; aspect-ratio: 16/9; object-fit: cover; }
-.home .title { margin: 1rem 1rem .25rem; color: var(--black); line-height: 1.2; }
-.home .date { margin: 0 1rem 1rem; color: var(--gray); font-size: .9rem; }
+.home ul li:not(.home .timeline li):first-child {
+  width: 100%;
+}
+.home ul li:not(.home .timeline li):hover {
+  transform: translateY(-4px);
+  box-shadow: var(--box-shadow);
+}
+.home ul li * {
+  text-decoration: none;
+}
+.home ul li a {
+  display: block;
+  color: var(--black);
+}
+.home ul li:first-child {
+  width: 100%;
+}
+.home ul li:first-child img {
+  width: 100%;
+  aspect-ratio: 16/8;
+  object-fit: cover;
+}
+.home ul li:first-child .title {
+  font-size: 1.6rem;
+  padding: 0 1rem;
+}
+.home ul li:first-child .date {
+  padding: 0 1rem 1rem;
+}
+.home ul li img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16/9;
+  object-fit: cover;
+}
+.home .title {
+  margin: 1rem 1rem 0.25rem;
+  color: var(--black);
+  line-height: 1.2;
+}
+.home .date {
+  margin: 0 1rem 1rem;
+  color: var(--gray);
+  font-size: 0.9rem;
+}
+
+.phase-header {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  margin: 2rem 0 0.75rem;
+}
+.phase-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--black);
+}
+.phase-months {
+  font-size: 0.8rem;
+  color: var(--gray);
+}
 
 @media (max-width: 720px) {
-  .home ul { gap: 1rem; }
-  .home ul li, .home ul li:first-child { width: 100%; text-align: left; }
-  .home ul li:first-child .title { font-size: 1.35rem; }
+  .home ul {
+    gap: 1rem;
+  }
+  .home ul li:not(.home .timeline li),
+  .home ul li:not(.home .timeline li):first-child {
+    width: 100%;
+    text-align: left;
+  }
+  .home ul li:first-child .title {
+    font-size: 1.35rem;
+  }
 }
