@@ -27,6 +27,160 @@
 .post .last-updated-on {
   font-style: italic;
 }
+.post-actions {
+  margin-top: 3rem;
+  display: flex;
+  justify-content: center;
+}
+.btn-download-pdf {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  border-radius: 999px;
+  padding: 0.6rem 1.5rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.btn-download-pdf:hover {
+  background: var(--primary-dark);
+}
+
+@media print {
+  header,
+  footer,
+  .post-actions,
+  .lightbox,
+  .print-modal,
+  .post .hero-image,
+  .post .date {
+    display: none !important;
+  }
+  .post .prose {
+    width: 100%;
+  }
+}
+
+.print-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+.print-modal.open {
+  display: flex;
+}
+.print-modal-box {
+  background: var(--white);
+  border-radius: 16px;
+  padding: 2rem;
+  max-width: 420px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.print-modal-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--black);
+  margin: 0;
+}
+.print-modal-body {
+  font-size: 0.9rem;
+  color: var(--gray);
+  margin: 0;
+  line-height: 1.6;
+}
+.print-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+.print-modal-cancel {
+  background: none;
+  border: 1px solid var(--cream-2);
+  border-radius: 999px;
+  padding: 0.5rem 1.25rem;
+  font-size: 0.9rem;
+  cursor: pointer;
+  color: var(--gray);
+  transition: border-color 0.2s;
+}
+.print-modal-cancel:hover {
+  border-color: var(--gray);
+}
+.print-modal-confirm {
+  background: var(--primary);
+  border: none;
+  border-radius: 999px;
+  padding: 0.5rem 1.25rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.print-modal-confirm:hover {
+  background: var(--primary-dark);
+}
+
+.post .prose img {
+  cursor: zoom-in;
+  border-radius: 8px;
+}
+
+.lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  cursor: zoom-out;
+}
+.lightbox.open {
+  display: flex;
+}
+.lightbox-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+.lightbox img {
+  max-width: 100%;
+  max-height: 80vh;
+  border-radius: 8px;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.6);
+  object-fit: contain;
+  cursor: default;
+}
+.lightbox-download {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.75);
+  text-decoration: none;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 0.4rem 1rem;
+  border-radius: 999px;
+  transition: color 0.2s, border-color 0.2s;
+}
+.lightbox-download:hover {
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.7);
+}
+
 @media (max-width: 720px) {
   .post .prose {
     width: 100%;

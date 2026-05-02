@@ -66,10 +66,75 @@ const {title, description, author, tags, pubDate, updatedDate, heroImage} =
               <hr />
             </div>
             <slot />
+            <div class="post-actions">
+              <button class="btn-download-pdf" id="btn-pdf">
+                Baixar em PDF
+              </button>
+            </div>
           </div>
         </article>
       </div>
     </main>
     <Footer />
+    <div class="print-modal" id="print-modal" role="dialog" aria-modal="true">
+      <div class="print-modal-box">
+        <p class="print-modal-title">Antes de salvar o PDF</p>
+        <p class="print-modal-body">
+          No diálogo de impressão, vá em <strong>Mais configurações</strong> e
+          desmarque <strong>Cabeçalhos e rodapés</strong> para um PDF mais limpo.
+        </p>
+        <div class="print-modal-actions">
+          <button id="print-cancel" class="print-modal-cancel">Cancelar</button>
+          <button id="print-confirm" class="print-modal-confirm">Salvar</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true">
+      <div class="lightbox-content">
+        <img id="lightbox-img" src="" alt="" />
+        <a id="lightbox-download" href="" download class="lightbox-download">
+          Baixar imagem
+        </a>
+      </div>
+    </div>
+    <script>
+      const printModal = document.getElementById("print-modal")!;
+      document.getElementById("btn-pdf")!.addEventListener("click", () => {
+        printModal.classList.add("open");
+      });
+      document.getElementById("print-cancel")!.addEventListener("click", () => {
+        printModal.classList.remove("open");
+      });
+      document.getElementById("print-confirm")!.addEventListener("click", () => {
+        printModal.classList.remove("open");
+        window.print();
+      });
+      printModal.addEventListener("click", (e) => {
+        if (e.target === printModal) printModal.classList.remove("open");
+      });
+
+      const lightbox = document.getElementById("lightbox")!;
+      const lightboxImg = document.getElementById("lightbox-img") as HTMLImageElement;
+      const lightboxDownload = document.getElementById("lightbox-download") as HTMLAnchorElement;
+
+      document.querySelectorAll<HTMLImageElement>(".post .prose img").forEach((img) => {
+        img.addEventListener("click", () => {
+          lightboxImg.src = img.src;
+          lightboxImg.alt = img.alt;
+          lightboxDownload.href = img.src;
+          lightboxDownload.download = img.src.split("/").pop() || "imagem";
+          lightbox.classList.add("open");
+        });
+      });
+
+      lightbox.addEventListener("click", (e) => {
+        if (e.target !== lightboxImg) lightbox.classList.remove("open");
+      });
+
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") lightbox.classList.remove("open");
+      });
+    </script>
   </body>
 </html>
